@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Daily Dashboard Schema",
+  "type": "object",
+  "required": [
+    "date",
+    "top_summary",
+    "key_metrics",
+    "today_priorities",
+    "calendar_alignment",
+    "agent_updates",
+    "risks_and_alerts",
+    "follow_ups"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Dashboard date in YYYY-MM-DD format"
+    },
+    "top_summary": {
+      "type": "string"
+    },
+    "key_metrics": {
+      "type": "object",
+      "required": [
+        "pending_count",
+        "blocked_count",
+        "completed_count",
+        "decision_needed_count",
+        "active_agent_count"
+      ],
+      "properties": {
+        "pending_count": { "type": "integer" },
+        "blocked_count": { "type": "integer" },
+        "completed_count": { "type": "integer" },
+        "decision_needed_count": { "type": "integer" },
+        "active_agent_count": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "today_priorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "source_agent", "reason", "next_step"],
+        "properties": {
+          "title": { "type": "string" },
+          "source_agent": { "type": "string" },
+          "reason": { "type": "string" },
+          "next_step": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "calendar_alignment": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "time_range",
+          "related_event",
+          "affected_item",
+          "suggested_priority"
+        ],
+        "properties": {
+          "time_range": { "type": "string" },
+          "related_event": { "type": "string" },
+          "affected_item": { "type": "string" },
+          "suggested_priority": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "agent_updates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "agent_name",
+          "latest_status",
+          "summary",
+          "next_step",
+          "confidence",
+          "source_file",
+          "report_date"
+        ],
+        "properties": {
+          "agent_name": { "type": "string" },
+          "latest_status": { "type": "string" },
+          "summary": { "type": "string" },
+          "next_step": { "type": "string" },
+          "confidence": { "type": "string" },
+          "source_file": { "type": "string" },
+          "report_date": { "type": "string" },
+          "extra": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "risks_and_alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "risk_description",
+          "impact_scope",
+          "needs_human_intervention"
+        ],
+        "properties": {
+          "risk_description": { "type": "string" },
+          "impact_scope": { "type": "string" },
+          "needs_human_intervention": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "follow_ups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "owner_source", "suggested_follow_up_time"],
+        "properties": {
+          "item": { "type": "string" },
+          "owner_source": { "type": "string" },
+          "suggested_follow_up_time": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
