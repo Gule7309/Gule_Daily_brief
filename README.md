@@ -55,13 +55,14 @@
 ## 自動更新流程
 
 - GitHub Actions workflow：`.github/workflows/refresh-dashboard.yml`
-- 當 `reports/`、dashboard schema 或生成腳本更新時，會自動重建 `dashboard/data/latest.json`
+- 當 `reports/`、dashboard schema 或生成腳本更新時，會自動驗證日報規範並重建 `dashboard/data/latest.json`
 - 也會在每天台北時間 00:00 嘗試重建一次資料
 - 如果首次自動回寫失敗，請檢查 repository 的 Actions workflow 權限是否允許寫入內容
 
 ## 每日操作說明
 
 - 詳細流程請看：`docs/daily-ops.md`
+- Agent 統一規範請看：`docs/agent-report-contract.md`
 
 ## 下一步
 
