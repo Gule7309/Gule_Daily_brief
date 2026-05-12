@@ -35,6 +35,12 @@
 - 指定日期：`python3 scripts/build_dashboard.py --date 2026-05-12`
 - 預設會讀取 `reports/`，並輸出到 `dashboard/data/YYYY-MM-DD.json` 與 `dashboard/data/latest.json`
 
+## 快速建立日報
+
+- 執行：`python3 scripts/new_report.py --agent frontend-dashboard-agent`
+- 指定日期：`python3 scripts/new_report.py --agent frontend-dashboard-agent --date 2026-05-13`
+- 覆蓋既有檔案：`python3 scripts/new_report.py --agent frontend-dashboard-agent --date 2026-05-13 --force`
+
 ## 本機預覽
 
 - 執行：`python3 -m http.server 8081`
@@ -52,6 +58,10 @@
 - 當 `reports/`、dashboard schema 或生成腳本更新時，會自動重建 `dashboard/data/latest.json`
 - 也會在每天台北時間 00:00 嘗試重建一次資料
 - 如果首次自動回寫失敗，請檢查 repository 的 Actions workflow 權限是否允許寫入內容
+
+## 每日操作說明
+
+- 詳細流程請看：`docs/daily-ops.md`
 
 ## 下一步
 
