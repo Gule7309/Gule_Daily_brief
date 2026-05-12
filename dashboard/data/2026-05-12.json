@@ -1,12 +1,12 @@
 {
   "date": "2026-05-12",
-  "top_summary": "今天共有 3 個活躍代理來源，3 個阻塞，3 個待跟進，5 個已完成或已更新事項。",
+  "top_summary": "今天共有 4 個活躍代理來源，3 個阻塞，3 個待跟進，5 個已完成或已更新事項。",
   "key_metrics": {
     "pending_count": 3,
     "blocked_count": 3,
     "completed_count": 5,
     "decision_needed_count": 1,
-    "active_agent_count": 3
+    "active_agent_count": 4
   },
   "today_priorities": [
     {
@@ -83,6 +83,18 @@
       "report_date": "2026-05-12",
       "extra": {
         "calendar_impact": "否"
+      }
+    },
+    {
+      "agent_name": "求職機會追蹤助手",
+      "latest_status": "unknown",
+      "summary": "目前無摘要",
+      "next_step": "目前無下一步",
+      "confidence": "medium",
+      "source_file": "reports/求職機會追蹤助手/2026-05-12.md",
+      "report_date": "2026-05-12",
+      "extra": {
+        "calendar_impact": "未知"
       }
     }
   ],
