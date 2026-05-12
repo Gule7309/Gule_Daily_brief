@@ -1,0 +1,53 @@
+{
+  "date": "YYYY-MM-DD",
+  "top_summary": "今天以需要決策與即將到來的時段風險為主，建議先看前 3 項優先事項。",
+  "key_metrics": {
+    "pending_count": 0,
+    "blocked_count": 0,
+    "completed_count": 0,
+    "decision_needed_count": 0,
+    "active_agent_count": 0
+  },
+  "today_priorities": [
+    {
+      "title": "目前無更新",
+      "source_agent": "system",
+      "reason": "尚未讀到任何代理日報",
+      "next_step": "將今日報告放入 reports/{agent_name}/YYYY-MM-DD.md"
+    }
+  ],
+  "calendar_alignment": [
+    {
+      "time_range": "目前無更新",
+      "related_event": "目前無事件資料",
+      "affected_item": "目前無關聯項目",
+      "suggested_priority": "normal"
+    }
+  ],
+  "agent_updates": [
+    {
+      "agent_name": "system",
+      "latest_status": "no_report",
+      "summary": "目前尚無代理報告可整理。",
+      "next_step": "新增第一份日報後即可開始聚合。",
+      "confidence": "high",
+      "source_file": "N/A",
+      "report_date": "YYYY-MM-DD",
+      "extra": {}
+    }
+  ],
+  "risks_and_alerts": [
+    {
+      "risk_description": "目前缺少代理日報來源。",
+      "impact_scope": "無法產出有內容的每日總覽。",
+      "needs_human_intervention": false
+    }
+  ],
+  "follow_ups": [
+    {
+      "item": "建立第一份代理日報",
+      "owner_source": "agent report source",
+      "suggested_follow_up_time": "today"
+    }
+  ]
+}
