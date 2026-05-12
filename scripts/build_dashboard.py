@@ -124,15 +124,15 @@ def parse_labeled_block(lines: list[str]) -> list[dict[str, str]]:
                 items.append(current)
             current = {}
             stripped = stripped[2:].strip()
-            if ":" in stripped:
-                key, value = stripped.split(":", 1)
+            if ":" in stripped or "：" in stripped:
+                key, value = split_label_value(stripped)
                 current[key.strip()] = value.strip()
             else:
                 current["item"] = stripped
             continue
-        if current is None or ":" not in stripped:
+        if current is None or (":" not in stripped and "：" not in stripped):
             continue
-        key, value = stripped.split(":", 1)
+        key, value = split_label_value(stripped)
         current[key.strip()] = value.strip()
 
     if current:
@@ -161,6 +161,12 @@ def first_nonempty(item: dict[str, str], keys: list[str], fallback: str = "") ->
     return fallback
 
 
+def split_label_value(text: str) -> tuple[str, str]:
+    if "：" in text:
+        return text.split("：", 1)
+    return text.split(":", 1)
+
+
 def parse_report(path: Path) -> Report:
     text = path.read_text(encoding="utf-8")
     meta, body = parse_frontmatter(text)
@@ -171,7 +177,9 @@ def parse_report(path: Path) -> Report:
     follow_ups = parse_labeled_block(sections.get("待跟進事項", []))
     completed = parse_labeled_block(sections.get("已完成或已更新事項", []))
     summary_block = parse_labeled_block(sections.get("給總覽儀表板的摘要", []))
-    summary_item = summary_block[0] if summary_block else {}
+    summary_item: dict[str, str] = {}
+    for item in summary_block:
+        summary_item.update(item)
 
     agent_name = meta.get("agent_name") or path.parent.name
     report_date = meta.get("report_date") or path.stem
