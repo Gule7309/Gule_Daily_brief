@@ -22,11 +22,29 @@
 - 每日輸出範例：`dashboard/examples/daily-dashboard.example.json`
 - 可發布資料目錄：`dashboard/data/`
 
+## 前端介面
+
+- 入口頁面：`index.html`
+- 樣式：`styles.css`
+- 前端邏輯：`app.js`
+- 預設讀取：`dashboard/data/latest.json`
+
 ## 產生每日總覽
 
 - 執行：`python3 scripts/build_dashboard.py`
 - 指定日期：`python3 scripts/build_dashboard.py --date 2026-05-12`
 - 預設會讀取 `reports/`，並輸出到 `dashboard/data/YYYY-MM-DD.json` 與 `dashboard/data/latest.json`
+
+## 本機預覽
+
+- 執行：`python3 -m http.server 8081`
+- 開啟：`http://localhost:8081`
+
+## Vercel 部署
+
+- 這個 repo 現在可直接作為靜態網站部署到 Vercel
+- Vercel 會讀取根目錄的 `index.html`
+- `vercel.json` 已補上基本設定
 
 ## 下一步
 
