@@ -1,0 +1,14 @@
+memory/
+output/
+
+.DS_Store
+Thumbs.db
+
+node_modules/
+dist/
+build/
+.cache/
+
+.env
+.env.*
+!.env.example
