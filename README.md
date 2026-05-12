@@ -8,6 +8,7 @@
 - `reports/`: 各代理每日 Markdown 報告
 - `dashboard/`: 儀表板輸出 schema、範例與發布用資料目錄
 - `docs/`: 路徑規則、欄位定義與維護說明
+- `scripts/`: 產生每日 dashboard 輸出的腳本
 
 ## 每日報告路徑規則
 
@@ -21,28 +22,14 @@
 - 每日輸出範例：`dashboard/examples/daily-dashboard.example.json`
 - 可發布資料目錄：`dashboard/data/`
 
+## 產生每日總覽
+
+- 執行：`python3 scripts/build_dashboard.py`
+- 指定日期：`python3 scripts/build_dashboard.py --date 2026-05-12`
+- 預設會讀取 `reports/`，並輸出到 `dashboard/data/YYYY-MM-DD.json` 與 `dashboard/data/latest.json`
+
 ## 下一步
 
 - 開始把各代理的日報依路徑規則放入 `reports/`
 - 依模板產生每日總覽 JSON，寫入 `dashboard/data/`
 - 再由 `localhost:8081` 讀取 `dashboard/data/` 顯示
-
-- # Reports
-
-這個目錄存放各代理的每日報告。
-
-## 命名規則
-
-- 路徑：`reports/{agent_name}/YYYY-MM-DD.md`
-- 日期格式：`YYYY-MM-DD`
-- `agent_name` 請使用穩定、可重複的英文或 kebab-case 名稱
-
-## 範例
-
-- `reports/research-agent/2026-05-12.md`
-- `reports/calendar-agent/2026-05-12.md`
-
-## 模板
-
-- 請從 `reports/_template/AGENT_NAME/YYYY-MM-DD.md` 複製
-- 若代理有額外欄位，可加在 `## 補充欄位` 區塊，不要改掉主要骨架
