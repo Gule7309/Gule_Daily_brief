@@ -1,19 +1,43 @@
 {
   "date": "2026-05-12",
-  "top_summary": "目前尚未收到可整理的代理日報，今天先維持空狀態摘要。",
+  "top_summary": "今天共有 3 個活躍代理來源，3 個阻塞，3 個待跟進，5 個已完成或已更新事項。",
   "key_metrics": {
-    "pending_count": 0,
-    "blocked_count": 0,
-    "completed_count": 0,
-    "decision_needed_count": 0,
-    "active_agent_count": 0
+    "pending_count": 3,
+    "blocked_count": 3,
+    "completed_count": 5,
+    "decision_needed_count": 1,
+    "active_agent_count": 3
   },
   "today_priorities": [
     {
-      "title": "目前無更新",
-      "source_agent": "system",
-      "reason": "尚未讀到任何代理日報",
-      "next_step": "將今日報告放入 reports/{agent_name}/YYYY-MM-DD.md"
+      "title": "完成總覽資料骨架初始化",
+      "source_agent": "dashboard-overview-agent",
+      "reason": "這是後續每日聚合與比較的基礎。",
+      "next_step": "開始接收更多代理日報並檢查欄位一致性。"
+    },
+    {
+      "title": "完成第一版 dashboard 資料生成流程",
+      "source_agent": "dashboard-overview-agent",
+      "reason": "首頁需要穩定資料來源才能持續更新。",
+      "next_step": "讓更新報告時自動重建 dashboard data。"
+    },
+    {
+      "title": "Vercel 已接上 repository",
+      "source_agent": "deployment-refresh-agent",
+      "reason": "首頁需要一個可公開存取的穩定入口。",
+      "next_step": "確認每次資料更新後都能觸發新的可見結果。"
+    },
+    {
+      "title": "準備建立自動刷新流程",
+      "source_agent": "deployment-refresh-agent",
+      "reason": "避免每次手動更新資料輸出。",
+      "next_step": "補上 workflow 並驗證第一次自動執行。"
+    },
+    {
+      "title": "完成可部署的 dashboard 首頁",
+      "source_agent": "frontend-dashboard-agent",
+      "reason": "目前需要一個能直接掛到 Vercel 的前端，不依賴額外 build。",
+      "next_step": "用更多真實資料驗證資訊密度與排版表現。"
     }
   ],
   "calendar_alignment": [
@@ -26,28 +50,74 @@
   ],
   "agent_updates": [
     {
-      "agent_name": "system",
-      "latest_status": "no_report",
-      "summary": "目前尚無代理報告可整理。",
-      "next_step": "新增第一份日報後即可開始聚合。",
+      "agent_name": "dashboard-overview-agent",
+      "latest_status": "on_track",
+      "summary": "總覽層資料骨架與生成流程已可運作，接下來重點是擴大真實日報來源。",
+      "next_step": "驗證更多代理日報能穩定進入同一 schema。",
       "confidence": "high",
-      "source_file": "N/A",
+      "source_file": "reports/dashboard-overview-agent/2026-05-12.md",
       "report_date": "2026-05-12",
-      "extra": {}
+      "extra": {
+        "calendar_impact": "否"
+      }
+    },
+    {
+      "agent_name": "deployment-refresh-agent",
+      "latest_status": "in_progress",
+      "summary": "部署入口已接好，現在最重要的是把資料刷新流程自動化。",
+      "next_step": "確認 GitHub Actions 能重建並回寫 dashboard data。",
+      "confidence": "medium",
+      "source_file": "reports/deployment-refresh-agent/2026-05-12.md",
+      "report_date": "2026-05-12",
+      "extra": {
+        "calendar_impact": "否"
+      }
+    },
+    {
+      "agent_name": "frontend-dashboard-agent",
+      "latest_status": "on_track",
+      "summary": "可部署的瑞士極簡 dashboard 首頁已上線，接下來重點是用真實資料把內容填滿。",
+      "next_step": "驗證多代理資料下的資訊密度與可讀性。",
+      "confidence": "high",
+      "source_file": "reports/frontend-dashboard-agent/2026-05-12.md",
+      "report_date": "2026-05-12",
+      "extra": {
+        "calendar_impact": "否"
+      }
     }
   ],
   "risks_and_alerts": [
     {
-      "risk_description": "目前缺少代理日報來源。",
-      "impact_scope": "無法產出有內容的每日總覽。",
+      "risk_description": "目前真實代理來源仍少，摘要密度還不高。",
+      "impact_scope": "首頁可讀性已建立，但決策訊號仍偏少。",
+      "needs_human_intervention": false
+    },
+    {
+      "risk_description": "若 repository 的 Actions 權限限制為唯讀，workflow 可能無法把新 JSON 寫回 main。",
+      "impact_scope": "報告更新後首頁不一定會自動刷新。",
+      "needs_human_intervention": true
+    },
+    {
+      "risk_description": "目前首頁資料量仍少，尚未完全驗證高密度內容時的視覺節奏。",
+      "impact_scope": "當代理條目變多時，可能需要微調行距與排序。",
       "needs_human_intervention": false
     }
   ],
   "follow_ups": [
     {
-      "item": "建立第一份代理日報",
-      "owner_source": "agent report source",
-      "suggested_follow_up_time": "today"
+      "item": "驗證更多代理報告是否都能被目前模板正確解析",
+      "owner_source": "dashboard-overview-agent",
+      "suggested_follow_up_time": "2026-05-13"
+    },
+    {
+      "item": "驗證第一輪自動生成與回寫",
+      "owner_source": "deployment-refresh-agent",
+      "suggested_follow_up_time": "今天"
+    },
+    {
+      "item": "確認真實多代理資料下的版面節奏",
+      "owner_source": "frontend-dashboard-agent",
+      "suggested_follow_up_time": "2026-05-13"
     }
   ]
 }
