@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>代理總覽儀表板</title>
+    <meta
+      name="description"
+      content="每日代理報告與行事曆關聯的瑞士極簡總覽儀表板。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="rail">
+        <div class="rail-block intro reveal">
+          <p class="eyebrow">Agent Overview Dashboard</p>
+          <h1>代理總覽儀表板</h1>
+          <p class="rail-copy">
+            讓今天最重要的資訊先浮到前面，細節留在後面。
+          </p>
+        </div>
+
+        <div class="rail-block reveal delay-1">
+          <p class="rail-label">資料日期</p>
+          <p class="rail-date" id="rail-date">載入中</p>
+        </div>
+
+        <div class="rail-block reveal delay-2">
+          <p class="rail-label">目前狀態</p>
+          <p class="rail-status" id="rail-status">整理中</p>
+        </div>
+
+        <div class="rail-block reveal delay-3">
+          <p class="rail-label">資料來源</p>
+          <p class="rail-copy">
+            讀取 <code>dashboard/data/latest.json</code>
+          </p>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="masthead reveal">
+          <div class="masthead-line">
+            <p class="masthead-label">Daily Briefing</p>
+            <p class="masthead-timestamp" id="last-updated">載入中</p>
+          </div>
+          <div class="masthead-grid">
+            <div>
+              <p class="section-kicker">頂部摘要</p>
+              <p class="top-summary" id="top-summary">讀取資料中…</p>
+            </div>
+            <div class="masthead-note">
+              <p>今天先看優先事項，再掃過風險與待跟進。</p>
+            </div>
+          </div>
+        </header>
+
+        <section class="metrics reveal delay-1" aria-labelledby="metrics-title">
+          <div class="section-head">
+            <p class="section-kicker">關鍵指標</p>
+            <h2 id="metrics-title">今天需要多少注意力</h2>
+          </div>
+          <div class="metric-grid" id="metric-grid"></div>
+        </section>
+
+        <section
+          class="priority-section reveal delay-2"
+          aria-labelledby="priorities-title"
+        >
+          <div class="section-head">
+            <p class="section-kicker">今日優先事項</p>
+            <h2 id="priorities-title">先看這幾件</h2>
+          </div>
+          <div class="priority-list" id="priority-list"></div>
+        </section>
+
+        <section
+          class="calendar-section reveal delay-3"
+          aria-labelledby="calendar-title"
+        >
+          <div class="section-head">
+            <p class="section-kicker">行事曆關聯</p>
+            <h2 id="calendar-title">哪些事情跟今天時段直接相關</h2>
+          </div>
+          <div class="calendar-list" id="calendar-list"></div>
+        </section>
+
+        <section
+          class="updates-section reveal delay-4"
+          aria-labelledby="updates-title"
+        >
+          <div class="section-head">
+            <p class="section-kicker">代理更新清單</p>
+            <h2 id="updates-title">各代理目前進度</h2>
+          </div>
+          <div class="update-table" id="agent-updates"></div>
+        </section>
+
+        <section class="split-band reveal delay-5">
+          <div class="split-panel" aria-labelledby="risks-title">
+            <div class="section-head">
+              <p class="section-kicker">風險與提醒</p>
+              <h2 id="risks-title">需要盯著看</h2>
+            </div>
+            <div class="risk-list" id="risk-list"></div>
+          </div>
+
+          <div class="split-panel" aria-labelledby="followups-title">
+            <div class="section-head">
+              <p class="section-kicker">待跟進事項</p>
+              <h2 id="followups-title">下一輪最可能要接手的事</h2>
+            </div>
+            <div class="followup-list" id="followup-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="metric-template">
+      <article class="metric-item">
+        <p class="metric-label"></p>
+        <p class="metric-value"></p>
+      </article>
+    </template>
+
+    <template id="priority-template">
+      <article class="priority-item">
+        <p class="priority-index"></p>
+        <div class="priority-body">
+          <div class="priority-headline">
+            <h3></h3>
+            <p class="source-chip"></p>
+          </div>
+          <p class="priority-reason"></p>
+          <p class="priority-next"></p>
+        </div>
+      </article>
+    </template>
+
+    <template id="calendar-template">
+      <article class="calendar-item">
+        <div class="calendar-time"></div>
+        <div class="calendar-body">
+          <h3></h3>
+          <p class="calendar-impact"></p>
+        </div>
+        <div class="calendar-priority"></div>
+      </article>
+    </template>
+
+    <template id="update-template">
+      <article class="update-row">
+        <div class="update-primary">
+          <h3></h3>
+          <p class="update-summary"></p>
+        </div>
+        <div class="update-meta">
+          <p class="update-status"></p>
+          <p class="update-next"></p>
+          <p class="update-source"></p>
+        </div>
+      </article>
+    </template>
+
+    <template id="risk-template">
+      <article class="risk-item">
+        <h3></h3>
+        <p class="risk-impact"></p>
+        <p class="risk-action"></p>
+      </article>
+    </template>
+
+    <template id="followup-template">
+      <article class="followup-item">
+        <h3></h3>
+        <p class="followup-owner"></p>
+        <p class="followup-time"></p>
+      </article>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
